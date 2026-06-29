@@ -5,25 +5,22 @@ on:
 
 jobs:
   build:
-
-    runs-on: windows-latest
+    runs-on: windows-2022
 
     steps:
-
     - uses: actions/checkout@v4
 
     - uses: microsoft/setup-msbuild@v2
 
-    - uses: NuGet/setup-nuget@v2
+    - name: Build x86
+      run: msbuild SoundPlayer1C.csproj /p:Configuration=Release /p:Platform=x86 /restore
 
-    - run: nuget restore
-
-    - run: msbuild SoundPlayer1C.csproj /p:Configuration=Release /p:Platform=x86
-
-    - run: msbuild SoundPlayer1C.csproj /p:Configuration=Release /p:Platform=x64
+    - name: Build x64
+      run: msbuild SoundPlayer1C.csproj /p:Configuration=Release /p:Platform=x64 /restore
 
     - uses: actions/upload-artifact@v4
       with:
         name: SoundPlayer1C
         path: |
-          **/*.dll
+          bin\x86\Release\net48\SoundPlayer1C.dll
+          bin\x64\Release\net48\SoundPlayer1C.dll
