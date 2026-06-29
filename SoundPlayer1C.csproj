@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <OutputType>Library</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyName>SoundPlayer1C</AssemblyName>
+    <RootNamespace>SoundPlayer1C</RootNamespace>
+    <Platforms>x86;x64</Platforms>
+    <RegisterForComInterop>true</RegisterForComInterop>
+    <ComVisible>true</ComVisible>
+  </PropertyGroup>
+
+</Project>
