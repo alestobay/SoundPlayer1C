@@ -12,11 +12,22 @@ namespace SoundPlayer1C
         private const int SND_FILENAME = 0x00020000;
         private const int SND_NODEFAULT = 0x0002;
 
+        private bool initialized = false;
+
         [DllImport("winmm.dll", CharSet = CharSet.Unicode)]
         private static extern bool PlaySound(string pszSound, IntPtr hmod, int fdwSound);
 
+        public bool Initialize()
+        {
+            initialized = true;
+            return true;
+        }
+
         public bool PlayWav(string fileName)
         {
+            if (!initialized)
+                initialized = true;
+
             return PlaySound(fileName, IntPtr.Zero,
                 SND_FILENAME | SND_ASYNC | SND_NODEFAULT);
         }
@@ -24,6 +35,13 @@ namespace SoundPlayer1C
         public bool Stop()
         {
             return PlaySound(null, IntPtr.Zero, 0);
+        }
+
+        public bool Release()
+        {
+            Stop();
+            initialized = false;
+            return true;
         }
     }
 }
